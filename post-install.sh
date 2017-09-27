@@ -9,3 +9,4 @@ ETCDIR=/data/etc
 
 $BINDIR/install-repo
 $BINDIR/install-pkg
+$BINDIR/install-user
