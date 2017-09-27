@@ -1,9 +1,12 @@
 #!/usr/bin/env bash
 
 HOMEDIR=/data/home
-
 USERS=(tonyvo asheph)
 
+## Change home dir for centos
+usermod -d /data/home/centos centos
+
+## Add users
 for USERNAME in ${USERS[@]}
 do
 	useradd -d $HOMEDIR/$USERNAME $USERNAME
