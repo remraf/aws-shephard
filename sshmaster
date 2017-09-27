@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+#
+# ssh to cluster
+#
+# Usage: sshmaster <cluster>
+#
+# 2017.09 tonyvo
+#
+###
+
+if [[ $# -ne 1 ]]
+then
+	echo "Error argument required"
+	echo "Usage: sshmaster <cluster>"
+	exit 1
+fi
+
+CLUSTER=$1
+SSH_KEY='~/.ssh/aws-shephard.pem'
+SSH_USER='centos'
+
+HOST=$(cfncluster status o1 | grep 'MasterPublicIP' | cut -d = -f2 | tr -d \")
+
+ssh -i $SSH_KEY -l $SSH_USER $HOST

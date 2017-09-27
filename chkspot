@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+#
+# Usage: chkspot <instance-type> 
+
+
+if [[ $# -ne 1 ]]
+then
+        echo "Error argument required"
+        echo "Usage: chkspot <instance-type>"
+        exit 1
+fi
+
+INSTANCE_TYPE=$1
+
+aws ec2 describe-spot-price-history \
+--instance-types $INSTANCE_TYPE \
+--start-time=$(date +%s) \
+--product-descriptions "Linux/UNIX (Amazon VPC)"
