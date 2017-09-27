@@ -5,9 +5,12 @@
 ###
 
 PKGS=(
-gcc-gfortran 
 git 
 tmux 
 )
 
+## Install updates
+yum update -y
+
+## Install packages
 yum install -y ${PKGS[*]}
