@@ -4,7 +4,7 @@ HOMEDIR=/data/home
 USERS=(tonyvo asheph)
 
 ## Change home dir for centos
-usermod -d /data/home/centos centos
+usermod -d ${HOMEDIR}/centos centos
 
 ## Add users
 for USERNAME in ${USERS[@]}
