@@ -1,0 +1,56 @@
+[aws]
+aws_access_key_id = AKIAICZX6EHJOMERYX2Q
+aws_secret_access_key = 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
+aws_region_name = us-east-1
+
+[cluster default]
+key_name = aws-shephard
+vpc_settings = shephard-vpc
+master_instance_type = t2.micro
+compute_instance_type = t2.micro
+base_os = centos7
+initial_queue_size = 1
+max_queue_size = 2
+maintain_initial_size = false
+scheduler = sge
+cluster_type = ondemand
+ephemeral_dir = /scratch
+shared_dir = /data
+master_root_volume_size = 15
+compute_root_volume_size = 15
+
+[cluster small]
+key_name = aws-shephard
+vpc_settings = shephard-vpc
+master_instance_type = t2.micro
+compute_instance_type = t2.micro
+base_os = centos7
+initial_queue_size = 1
+max_queue_size = 5
+maintain_initial_size = false
+scheduler = sge
+cluster_type = ondemand
+ephemeral_dir = /scratch
+shared_dir = /data
+master_root_volume_size = 15
+compute_root_volume_size = 15
+ebs_settings = data
+post_install = https://shephard-s3.s3.amazonaws.com/post-install.sh
+
+[ebs data]
+ebs_volume_id = vol-03c3049ae542aa863
+volume_type = gp2
+volume_size = 50
+
+[vpc shephard-vpc]
+vpc_id = vpc-c1799fb9
+master_subnet_id = subnet-dfa466e0
+ssh_from = 34.235.175.14/32
+additional_sg = sg-845b31f7
+
+[global]
+cluster_template = default
+update_check = true
+sanity_check = true
+
+
