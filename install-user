@@ -1,43 +1,10 @@
-#!/bin/bash
-#
-# Bootstrap script for deploying an auto-scaling JupyterHub cluster
-#
-# ks347 '17
+#!/usr/bin/env bash
 
-. /etc/cfncluster/cfnconfig 
+HOMEDIR=/data/home
 
-HOMEDIR="/data/home"
-DATADIR="/data/shared"
-SOFTWAREDIR="/data/global"
+USERS=(tonyvo asheph)
 
-# Make home and software dirs
-if [[ ! -d $HOMEDIR ]]
-  then
-    mkdir -p $HOMEDIR
-fi
-
-if [[ ! -d $DATADIR ]]
-  then
-    mkdir -p $DATADIR
-fi
-
-if [[ ! -d $SOFTWAREDIR ]]
-  then
-    mkdir -p $SOFTWAREDIR
-fi
-
-EXPORTPATH="export PATH=\"$SOFTWAREDIR/Anaconda-4.4.0/bin:\$PATH\""
-
-# Import root key
-mkdir -p /root/.ssh
-chmod 700 /root/.ssh
-cp $DATADIR/root/.ssh/id_rsa /root/.ssh
-cat $DATADIR/root/.ssh/id_rsa.pub >> /root/.ssh/authorized_keys
-chmod 600 /root/.ssh/authorized_keys
-
-# Add cron for parsing new users
-(crontab -l; echo "*/5 * * * * /data/bin/ParseAddUsers.sh") |crontab -
-
-# Initial Sync of Users
-/data/bin/ParseAddUsers.sh
-
+for USERNAME in ${USERS[@]}
+do
+	useradd -d $HOMEDIR/$USERNAME $USERNAME
+done
