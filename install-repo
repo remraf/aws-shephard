@@ -1,0 +1,17 @@
+#!/bin/bash
+#
+# install repositories
+#
+###
+
+## EPEL repo
+EPELDIR=/opt/pkgs/epel
+
+if [ ! -d $EPELDIR ]; then
+        mkdir -p $EPELDIR
+fi
+
+cd $EPELDIR
+curl -O https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm 2
+> /dev/null
+yum localinstall -y epel-release-latest-7.noarch.rpm

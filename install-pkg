@@ -1,0 +1,13 @@
+#!/bin/bash
+#
+# install packages
+#
+###
+
+PKGS=(
+gcc-gfortran 
+git 
+tmux 
+)
+
+yum install -y ${PKGS[*]}
