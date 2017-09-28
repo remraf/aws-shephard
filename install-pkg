@@ -8,6 +8,7 @@ PKGDIR=/opt/pkgs
 PKGS=(
 epel-release
 git 
+openmpi
 tmux 
 )
 
@@ -23,8 +24,9 @@ if [[ ! -d $ANACONDADIR ]]
 then
 	mkdir -p $ANACONDADIR; cd $ANACONDADIR
 	curl -O https://repo.continuum.io/archive/Anaconda3-5.0.0-Linux-x86_64.sh &&
-	bash Anaconda3-5.0.0-Linux-x86_64.sh -b -p ${ANACONDADIR}/3.6
+	bash Anaconda3-5.0.0-Linux-x86_64.sh -b -p ${ANACONDADIR}/3.6 && 
+	rm Anaconda3-5.0.0-Linux-x86_64.sh
 fi
 
 # Install Environment Modules
-
+echo "/data/etc/modulefiles" >> /usr/share/Modules/init/.modulespath
