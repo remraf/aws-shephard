@@ -10,7 +10,7 @@ tmux
 )
 
 ## Install updates
-yum update -y
+#yum update -y
 
 ## Install packages
 yum install -y ${PKGS[*]}
