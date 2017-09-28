@@ -6,24 +6,22 @@
 
 PKGDIR=/opt/pkgs
 PKGS=(
+epel-release
 git 
 tmux 
 )
 
-# Install updates
+# Install Updates
 #yum update -y
 
 # Install packages
 yum install -y ${PKGS[*]}
 
-# Install EPEL
-EPELDIR=/opt/pkgs/epel
-mkdir -p $EPELDIR; cd $EPELDIR
-curl -O https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm 2> /dev/null &&
-yum localinstall -y epel-release-latest-7.noarch.rpm
-
-# Install anaconda
+# Install Anaconda
 ANACONDADIR=${PKGDIR}/anaconda
 mkdir -p $ANACONDADIR; cd $ANACONDADIR
 curl -O https://repo.continuum.io/archive/Anaconda3-5.0.0-Linux-x86_64.sh &&
 bash Anaconda3-5.0.0-Linux-x86_64.sh -b -p ${ANACONDADIR}/3.6
+
+# Install Environment Modules
+
