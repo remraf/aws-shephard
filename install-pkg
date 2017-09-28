@@ -19,9 +19,12 @@ yum install -y ${PKGS[*]}
 
 # Install Anaconda
 ANACONDADIR=${PKGDIR}/anaconda
-mkdir -p $ANACONDADIR; cd $ANACONDADIR
-curl -O https://repo.continuum.io/archive/Anaconda3-5.0.0-Linux-x86_64.sh &&
-bash Anaconda3-5.0.0-Linux-x86_64.sh -b -p ${ANACONDADIR}/3.6
+if [[ ! -d $ANACONDADIR ]]
+then
+	mkdir -p $ANACONDADIR; cd $ANACONDADIR
+	curl -O https://repo.continuum.io/archive/Anaconda3-5.0.0-Linux-x86_64.sh &&
+	bash Anaconda3-5.0.0-Linux-x86_64.sh -b -p ${ANACONDADIR}/3.6
+fi
 
 # Install Environment Modules
 
