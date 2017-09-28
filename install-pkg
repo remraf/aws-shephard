@@ -4,7 +4,7 @@
 #
 ##
 
-PKGDIR=/opt/pkgs
+PKGDIR=/data/opt/pkgs
 PKGS=(
 epel-release
 git 
@@ -18,6 +18,8 @@ tmux
 # Install packages
 yum install -y ${PKGS[*]}
 
+### CUSTOM PACKAGES
+
 # Install Anaconda
 ANACONDADIR=${PKGDIR}/anaconda
 if [[ ! -d $ANACONDADIR ]]
@@ -30,3 +32,11 @@ fi
 
 # Install Environment Modules
 echo "/data/etc/modulefiles" >> /usr/share/Modules/init/.modulespath
+
+# Install Intel Compilers
+INTELDIR=${PKGDIR}/intel
+if [[ ! -d $INTELDIR ]]
+then
+	mkdir -p $INTELDIR; cd $INTELDIR
+	curl -O http://registrationcenter-download.intel.com/akdlm/irc_nas/tec/12062/parallel_studio_xe_2018_professional_edition.tgz
+fi
