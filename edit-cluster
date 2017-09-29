@@ -4,7 +4,7 @@
 #
 ##
 
-CLUSTERFILE='$HOME/.cfncluster/config'
+CLUSTERFILE="$HOME/.cfncluster/config"
 ALT_EDITOR=/usr/bin/vim
 
 while getopts :hn OPT
