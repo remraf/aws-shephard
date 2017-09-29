@@ -3,10 +3,10 @@
 # Description: attach /backup drive to system
 #
 
-DEVICE='/dev/xvdb'
+DEVICE=/dev/xvdb
 INSTANCE=$(curl -s http://169.254.169.254/latest/meta-data/instance-id)
-MTDIR='/data'
-VOLUME='vol-0c4b366aad94401b7'
+MTDIR=/data
+VOLUME=vol-03c3049ae542aa863
 
 # check if volume already mounted
 mountpoint -q $MTDIR
@@ -19,8 +19,7 @@ then
 else
         # attach volume to instance
         echo "Attaching ${MTDIR}..."
-        aws ec2 attach-volume --volume-id $VOLUME --instance-id $INSTANCE --devi
-ce $DEVICE &> /dev/null
+        aws ec2 attach-volume --volume-id $VOLUME --instance-id $INSTANCE --device $DEVICE &> /dev/null
         # allow time for attaching
         sleep 4
         # check attachment and mount

@@ -3,10 +3,10 @@
 # Description: detach /backup drive from system
 #
 
-DEVICE='/dev/xvdf'
+DEVICE=/dev/xvdf
 INSTANCE=$(curl -s http://169.254.169.254/latest/meta-data/instance-id)
-MTDIR='/backup'
-VOLUME='vol-0c4b366aad94401b7'
+MTDIR=/data
+VOLUME=vol-03c3049ae542aa863
 
 # check if volume mounted
 mountpoint -q $MTDIR
@@ -16,8 +16,7 @@ if [[ $? -eq 0 ]]
 then
         echo "Detaching ${MTDIR}..."
         sudo umount $MTDIR 2> /dev/null
-        aws ec2 detach-volume --volume-id $VOLUME --instance-id $INSTANCE &> /de
-v/null
+        aws ec2 detach-volume --volume-id $VOLUME --instance-id $INSTANCE &> /dev/null
 else
         echo "$MTDIR not mounted"
         exit 0
