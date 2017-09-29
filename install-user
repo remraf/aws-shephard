@@ -3,7 +3,7 @@
 HOMEDIR=/data/home
 USERS=(tonyvo asheph)
 
-## Change home dir for centos
+## Prep centos user
 usermod -d ${HOMEDIR}/centos centos
 
 ## Add users
