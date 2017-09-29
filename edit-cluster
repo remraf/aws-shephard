@@ -4,27 +4,53 @@
 #
 ##
 
-CLUSTERFILE="$HOME/.cfncluster/config"
-ALT_EDITOR=/usr/bin/vim
+CONFDIR=$HOME/.cfncluster
+EDITOR=/usr/bin/vim
+PS3="Select number: "
+TEMPLATE=$CONFDIR/spot						# default template
+TEMPLATE_ONDEMAND=$CONFDIR/ondemand
+TEMPLATE_SPOT=$CONFDIR/spot
 
-while getopts :hn OPT
+usage() {
+	echo "Usage: edit-cluster [-o] [-s] <filename>"
+}
+
+# Select cluster type configuration
+while getopts :os in OPT
 do
-        case $OPT in
-        n)
-                nano $CLUSTERFILE
-                exit 0
-                ;;
-        *)
-                echo "Invalid option: $OPT"
-                exit 1
-                ;;
-        esac
+	case $OPT in
+		o)
+			TEMPLATE=$TEMPLATE_ONDEMAND
+			;;
+		s)
+			TEMPLATE=$TEMPLATE_SPOT
+			;;
+		*)
+			echo "Error: invalid option"
+			usage
+			exit 1
+			;;
+	esac
+	echo $TEMPLATE
+	shift
 done
 
-if [[ ! $EDITOR ]]
+# Check for filename
+if [[ $# != 1 ]]
 then
-	EDITOR=$ALT_EDITOR
-	echo "Using editor: vim"
+	echo "Error: argument required"
+	usage
+	exit 1
+else
+	FILE=$1
 fi
-	
-$EDITOR $CLUSTERFILE
+
+# Edit file
+if [[ -f ${CONFDIR}/$FILE ]]
+then
+	echo "File Found: $FILE"
+else
+	cp ${CONFDIR}/spot ${CONFDIR}/$FILE
+fi 	
+
+echo $EDITOR ${CONFDIR}/$FILE
