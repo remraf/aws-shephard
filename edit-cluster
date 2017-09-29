@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+# 
+# edit cluster definitions using EDITOR
+#
+##
+
+CLUSTERFILE='$HOME/.cfncluster/config'
+ALT_EDITOR=/usr/bin/vim
+
+while getopts :hn OPT
+do
+        case $OPT in
+        n)
+                nano $CLUSTERFILE
+                exit 0
+                ;;
+        *)
+                echo "Invalid option: $OPT"
+                exit 1
+                ;;
+        esac
+done
+
+if [[ ! $EDITOR ]]
+then
+	EDITOR=$ALT_EDITOR
+	echo "Using editor: vim"
+fi
+	
+$EDITOR $CLUSTERFILE
