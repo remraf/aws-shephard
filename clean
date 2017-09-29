@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# 
+# remove auxiliary files from job submissions  
+#
+##
+
+rm *.{log,out} 2> /dev/null
