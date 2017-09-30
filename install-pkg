@@ -8,18 +8,14 @@ PKGDIR=/data/opt/pkgs
 PKGS=(
 epel-release
 git 
-glibc
 glibc.i686
-libgcc
 libgcc.i686
-libstdc++
 libstdc++.i686
-openmpi
 tmux 
 )
 
 # Install Updates
-#yum update -y
+yum update -y
 
 # Install packages
 yum install -y ${PKGS[*]}
