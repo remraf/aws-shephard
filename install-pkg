@@ -6,20 +6,21 @@
 
 PKGDIR=/data/opt/pkgs
 PKGS=(
+compat-libstdc++-33
+compat-libstdc++-33.i686
 epel-release
 git 
-glibc
 glibc.i686
-libgcc
+glibc-devel.i686
 libgcc.i686
-libstdc++
 libstdc++.i686
-openmpi
+libstdc++-static
+libstdc++-static.i686
 tmux 
 )
 
 # Install Updates
-#yum update -y
+yum update -y
 
 # Install packages
 yum install -y ${PKGS[*]}
