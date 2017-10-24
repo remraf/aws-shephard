@@ -27,7 +27,7 @@ PKGS=(
 yum update -y
 
 # Install packages
-yum install -y ${PKGS[*]}
+yum install -y ${PKGS[@]}
 
 ### CUSTOM PACKAGES
 
