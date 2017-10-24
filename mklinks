@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+#
+# create symlinks for files to TARGETDIR
+#
+# Usage: mklinks <file> [...<file>]
+#
+##
+
+TARGETDIR=$HOME
+
+for FILE in $@
+do
+   if [[ -f $TARGETDIR/$FILE ]]
+   then
+      rm $TARGETDIR/$FILE
+   fi
+
+   ln -s $PWD/$FILE $TARGETDIR/$FILE
+done
