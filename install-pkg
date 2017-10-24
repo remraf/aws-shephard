@@ -9,6 +9,8 @@ PKGS=(
 compat-libstdc++-33
 compat-libstdc++-33.i686
 epel-release
+expect
+gcc-c++
 git 
 glibc.i686
 glibc-devel.i686
@@ -16,6 +18,7 @@ libgcc.i686
 libstdc++.i686
 libstdc++-static
 libstdc++-static.i686
+redhat-lsb
 tmux 
 )
 
@@ -40,10 +43,3 @@ fi
 # Install Environment Modules
 echo "/data/etc/modulefiles" >> /usr/share/Modules/init/.modulespath
 
-# Install Intel Compilers
-INTELDIR=${PKGDIR}/intel
-if [[ ! -d $INTELDIR ]]
-then
-	mkdir -p $INTELDIR; cd $INTELDIR
-	curl -O http://registrationcenter-download.intel.com/akdlm/irc_nas/tec/12062/parallel_studio_xe_2018_professional_edition.tgz
-fi
