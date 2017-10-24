@@ -6,21 +6,21 @@
 
 PKGDIR=/data/opt/pkgs
 PKGS=(
-bash-completion
-compat-libstdc++-33
-compat-libstdc++-33.i686
-epel-release
-expect
-gcc-c++
-git 
-glibc.i686
-glibc-devel.i686
-libgcc.i686
-libstdc++.i686
-libstdc++-static
-libstdc++-static.i686
-redhat-lsb
-tmux 
+   bash-completion
+   compat-libstdc++-33
+   compat-libstdc++-33.i686
+   epel-release
+   expect
+   gcc-c++
+   git 
+   glibc.i686
+   glibc-devel.i686
+   libgcc.i686
+   libstdc++.i686
+   libstdc++-static
+   libstdc++-static.i686
+   redhat-lsb
+   tmux 
 )
 
 # Install Updates
@@ -44,3 +44,6 @@ fi
 # Install Environment Modules
 echo "/data/etc/modulefiles" >> /usr/share/Modules/init/.modulespath
 
+# Configure SGE
+qconf -Mq /data/opt/sge/all.q
+qconf -Aq /data/opt/sge/autoscale.q
