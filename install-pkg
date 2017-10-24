@@ -6,6 +6,7 @@
 
 PKGDIR=/data/opt/pkgs
 PKGS=(
+bash-completion
 compat-libstdc++-33
 compat-libstdc++-33.i686
 epel-release
