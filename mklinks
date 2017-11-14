@@ -6,7 +6,7 @@
 #
 ##
 
-TARGETDIR=$HOME
+TARGETDIR=$HOME/bin
 
 for FILE in $@
 do

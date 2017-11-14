@@ -17,7 +17,7 @@ fi
 
 CLUSTER=$1
 SSH_KEY='~/.ssh/aws-shephard.pem'
-SSH_USER='centos'
+SSH_USER='ubuntu'
 
 HOST=$(cfncluster status $CLUSTER | grep 'MasterPublicIP' | cut -d = -f2 | tr -d \")
 
