@@ -9,6 +9,7 @@ PKGS=(
    bash-completion
    compat-libstdc++-33
    compat-libstdc++-33.i686
+   environment-modules
    epel-release
    expect
    gcc-c++
@@ -24,10 +25,11 @@ PKGS=(
 )
 
 # Install Updates
-yum update -y
+aptitude update
+aptitude upgrade
 
 # Install packages
-yum install -y ${PKGS[@]}
+aptitude install -y ${PKGS[@]}
 
 ### CUSTOM PACKAGES
 
@@ -41,9 +43,6 @@ then
 	bash Anaconda3-5.0.0-Linux-x86_64.sh -b -p ${ANACONDADIR}/3.6 && 
 	rm Anaconda3-5.0.0-Linux-x86_64.sh
 fi
-
-# Install Environment Modules
-echo "/data/etc/modulefiles" >> /usr/share/Modules/init/.modulespath
 
 # Install Environment Modules
 echo "/data/etc/modulefiles" >> /usr/share/Modules/init/.modulespath
