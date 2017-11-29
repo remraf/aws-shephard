@@ -6,7 +6,7 @@
 DEVICE=/dev/xvdf
 INSTANCE=$(curl -s http://169.254.169.254/latest/meta-data/instance-id)
 MTDIR=/data
-VOLUME=vol-03c3049ae542aa863
+VOLUME=vol-099e68dd46bba9636
 
 # check if volume mounted
 mountpoint -q $MTDIR

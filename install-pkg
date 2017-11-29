@@ -45,7 +45,7 @@ then
 fi
 
 # Install Environment Modules
-echo "/data/etc/modulefiles" >> /usr/share/Modules/init/.modulespath
+echo "/data/etc/modulefiles" >> /usr/share/modules/init/.modulespath
 
 # Install Intel Compilers
 INTELDIR=${PKGDIR}/intel

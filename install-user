@@ -3,8 +3,8 @@
 HOMEDIR=/data/home
 USERS=(tonyvo asheph)
 
-## Prep centos user
-usermod -d ${HOMEDIR}/centos centos
+## Prep ubuntu user
+usermod -d ${HOMEDIR}/ubuntu ubuntu
 
 ## Add users
 for USERNAME in ${USERS[@]}
