@@ -6,30 +6,20 @@
 
 PKGDIR=/data/opt/pkgs
 PKGS=(
-   bash-completion
-   compat-libstdc++-33
-   compat-libstdc++-33.i686
    environment-modules
-   epel-release
    expect
-   gcc-c++
    git 
-   glibc.i686
-   glibc-devel.i686
-   libgcc.i686
-   libstdc++.i686
-   libstdc++-static
-   libstdc++-static.i686
-   redhat-lsb
-   tmux 
 )
+
+# Enable 32-bit packages
+dpkg --add-architecture i386
 
 # Install Updates
 aptitude update
 aptitude upgrade
 
 # Install packages
-aptitude install -y ${PKGS[@]}
+apt-get install -y ${PKGS[@]}
 
 ### CUSTOM PACKAGES
 
