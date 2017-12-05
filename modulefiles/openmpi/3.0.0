@@ -1,0 +1,26 @@
+#%Modules1.0
+#
+# openmpi/3.0.0
+#
+# 2017.10 tonyvo
+#
+###
+
+## Local
+set   BINARY		openmpi
+set	VERSION		3.0.0
+set	PKGDIR		/data/opt/pkgs/openmpi/3.0.0
+
+## Help
+module-whatis "provides $BINARY $VERSION"
+proc ModulesHelp { } {
+
+   puts stderr "provides $BINARY $VERSION"
+}
+
+## Global
+setenv            MPI_HOME          $PKGDIR
+setenv            MPI_BIN           $PKGDIR/bin
+setenv            MPI_LIB           $PKGDIR/lib
+prepend-path      PATH              $PKGDIR/bin
+prepend-path      LD_LIBRARY_PATH   $PKGDIR/lib

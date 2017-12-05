@@ -1,0 +1,23 @@
+#%Module.10
+#
+# Intel Parallel Studio XE Professional Edition/2018
+#
+##
+
+# Local
+set	BINARY		parallel_studio_xe
+set	VERSION		2018
+set	PKGDIR		/data/opt/pkgs/intel/2018
+
+# Help
+module-whatis "provides $BINARY $VERSION"
+proc ModulesHelp { } {
+	global BINARY VERSION
+
+	puts stderr "provides $BINARY $VERSION"
+}
+
+# Global
+prepend-path		PATH		$PKGDIR/bin
+prepend-path		LD_LIBRARY_PATH	$PKGDIR/lib/intel64
+prepend-path		MANPATH		$PKGDIR/man/common

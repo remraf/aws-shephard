@@ -1,0 +1,20 @@
+#%Module1.0
+#
+# anaconda/3.6
+#
+##
+
+# Local
+set	BINARY		anaconda
+set	VERSION		3.6	
+set 	PKGDIR		/data/opt/pkgs/anaconda/3.6
+
+# Help
+module-whatis "provides $BINARY $VERSION"
+proc ModulesHelp { } {
+	global BINARY VERSION
+	puts stderr "provides $BINARY $VERSION"
+}
+
+# Global
+prepend-path	PATH		$PKGDIR/bin
