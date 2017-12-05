@@ -11,15 +11,12 @@ PKGS=(
    git 
 )
 
-# Enable 32-bit packages
-dpkg --add-architecture i386
-
 # Install Updates
 aptitude update
 aptitude upgrade
 
 # Install packages
-apt-get install -y ${PKGS[@]}
+aptitude install -y ${PKGS[@]}
 
 ### CUSTOM PACKAGES
 
@@ -42,7 +39,7 @@ INTELDIR=${PKGDIR}/intel
 if [[ ! -d $INTELDIR ]]
 then
         mkdir -p $INTELDIR; cd $INTELDIR
-        curl -O http://registrationcenter-download.intel.com/akdlm/irc_nas/tec/12062/parallel_studio_xe_2018_professional_edition.tgz
+        curl -O http://registrationcenter-download.intel.com/akdlm/irc_nas/tec/12375/parallel_studio_xe_2018_update1_professional_edition.tgz
 fi
  
 # Configure SGE
