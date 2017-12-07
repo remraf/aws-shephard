@@ -8,6 +8,7 @@ PKGDIR=/data/opt/pkgs
 PKGS=(
    environment-modules
    expect
+   g++-4.8-multilib
    git 
    libclalsadrv2
    lsb
