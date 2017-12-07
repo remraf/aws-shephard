@@ -9,6 +9,9 @@ PKGS=(
    environment-modules
    expect
    git 
+   libclalsadrv2
+   lsb
+   xorg
 )
 
 # Install Updates
