@@ -6,8 +6,8 @@
 
 # Local
 set	BINARY		parallel_studio_xe
-set	VERSION		2018
-set	PKGDIR		/data/opt/pkgs/intel/2018
+set	VERSION		2018u1
+set	PKGDIR		/data/opt/pkgs/intel/2018u1
 
 # Help
 module-whatis "provides $BINARY $VERSION"
