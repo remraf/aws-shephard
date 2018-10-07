@@ -1,0 +1,38 @@
+[aws]
+aws_region_name = us-east-1
+
+[cluster default]
+key_name = aws-shephard
+cluster_type = spot
+spot_price = 0.50
+master_instance_type = t2.medium
+compute_instance_type = c4.2xlarge  
+initial_queue_size = 16
+max_queue_size = 16
+maintain_initial_size = false
+base_os = ubuntu1404
+scheduler = sge
+vpc_settings = shephard-vpc
+master_root_volume_size = 15
+compute_root_volume_size = 15
+ephemeral_dir = /scratch
+shared_dir = /data
+ebs_settings = data
+extra_json = { "cfncluster" : { "cfn_scheduler_slots" : "cores" } }
+pre_install = https://shephard-s3.s3.amazonaws.com/pre-install.sh
+post_install = https://shephard-s3.s3.amazonaws.com/post-install.sh
+
+[vpc shephard-vpc]
+vpc_id = vpc-c1799fb9
+master_subnet_id = subnet-dfa466e0
+additional_sg = sg-845b31f7
+ssh_from = 23.23.59.212/32
+
+[ebs data]
+ebs_volume_id = vol-060b9426aa6ffe169
+volume_size = 50
+
+[global]
+cluster_template = default
+update_check = true
+sanity_check = true

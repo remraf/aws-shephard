@@ -1,0 +1,16 @@
+[aws]
+aws_region_name = us-east-1
+
+[cluster default]
+vpc_settings = shephard-vpc
+key_name = aws-shephard-keypair
+
+[vpc shephard-vpc]
+master_subnet_id = subnet-dfa466e0
+vpc_id = vpc-c1799fb9
+
+[global]
+sanity_check = true
+update_check = true
+cluster_template = default
+
