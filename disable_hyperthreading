@@ -1,0 +1,74 @@
+#!/bin/bash
+#
+# disable_hyperthreading Disables CPU hyperthreading
+#
+# chkconfig: 2345 01 20
+# description: Disables CPU hyperthreading
+
+. /etc/rc.d/init.d/functions
+
+start() {
+    parent_cores=$(cat /sys/devices/system/cpu/cpu*/topology/thread_siblings_list | cut -d, -f1 | cut -d- -f1 | tr '-' '\n' | tr ',' '\n'| sort -un)
+
+    # If there are no parents, HT is probably already disabled.
+    if [ "$parent_cores" == "" ]; then
+                parent_cores=$(cat /sys/devices/system/cpu/cpu*/topology/thread_siblings_list)
+    fi
+
+    total_cores=$(cat /sys/devices/system/cpu/cpu*/topology/thread_siblings_list | cut -d, -f1 | cut -d- -f1 | tr '-' '\n' | tr ',' '\n'| sort -un | wc -l)
+    sibling_cores=$(cat /sys/devices/system/cpu/cpu*/topology/thread_siblings_list | cut -d, -f2- | cut -d- -f2- | tr '-' '\n' | tr ',' '\n'| sort -un)
+
+    # Ensure enabled cores are enabled - starting at 1, cpu0 can't be changed
+    for p in $parent_cores; do
+        if [ $p -ne 0 ]; then
+            echo 1 > /sys/devices/system/cpu/cpu${p}/online
+        fi
+    done
+
+    if [ "$parent_cores" == "$sibling_cores" ]; then
+        echo "Hyperthreading already disabled"
+    else
+        # Ensure disabled threads are actually disabled
+        for s in $sibling_cores; do
+            echo 0 > /sys/devices/system/cpu/cpu${s}/online
+        done
+    fi
+    fix_boot
+}
+
+function fix_boot() {
+
+    echo "Updating kernel line"
+
+    if [[ -x /sbin/grubby ]] ; then
+        /sbin/grubby --update-kernel=ALL --args=maxcpus=$total_cores
+    fi
+
+    if [ -e /etc/default/grub ]; then
+
+        if grep -q maxcpus /etc/default/grub; then
+            sed -i "s/maxcpus=[0-9]*/maxcpus=$total_cores/g" /etc/default/grub
+        else
+            sed -i "/^GRUB_CMDLINE_LINUX=/ s/\"$/ maxcpus=$total_cores\"/" /etc/default/grub
+        fi
+
+        if [ -e /etc/grub2.cfg ]; then
+            grub2-mkconfig > /etc/grub2.cfg
+        fi
+
+        if which update-grub; then
+            update-grub
+        fi
+    fi
+
+}
+
+case "$1" in
+  start)
+    start
+  ;;
+  stop|status|restart|reload|force-reload)
+    # do nothing
+  ;;
+esac
+
